@@ -51,12 +51,6 @@ body {
   background-color: hsl(226, 43%, 10%);
 }
 
-.wrapper {
-  min-width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .attribution {
   font-size: 0.9rem;
   position: relative;
