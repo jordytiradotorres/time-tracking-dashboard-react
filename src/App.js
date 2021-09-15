@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
+import styled from "styled-components";
+import Menu from "./components/Menu";
 
-function App() {
+import devices from "./helpers/devices";
+
+const Dashboard = styled.div`
+  margin-top: 3rem;
+`;
+
+const Gutter = styled.div`
+  margin: 0 auto;
+  width: 90%;
+
+  @media ${devices.tablet} {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+  }
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <div className="wrapper">
+        <Dashboard>
+          <Gutter>
+            <Menu />
+          </Gutter>
+        </Dashboard>
+      </div>
+    </main>
   );
-}
+};
 
 export default App;
