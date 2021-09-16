@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Card from "./components/Card";
 import Menu from "./components/Menu";
@@ -34,41 +35,47 @@ const Gutter = styled.div`
   }
 `;
 
+const images = [
+  {
+    url: iconWork,
+    title: "Work",
+  },
+  {
+    url: iconPlay,
+    title: "Play",
+  },
+  {
+    url: iconStudy,
+    title: "Study",
+  },
+  {
+    url: iconExercise,
+    title: "Exercise",
+  },
+  {
+    url: iconSocial,
+    title: "Social",
+  },
+  {
+    url: iconSelfCare,
+    title: "Self Care",
+  },
+];
+
 const App = () => {
-  const images = [
-    {
-      url: iconWork,
-      title: "Work",
-    },
-    {
-      url: iconPlay,
-      title: "Play",
-    },
-    {
-      url: iconStudy,
-      title: "Study",
-    },
-    {
-      url: iconExercise,
-      title: "Exercise",
-    },
-    {
-      url: iconSocial,
-      title: "Social",
-    },
-    {
-      url: iconSelfCare,
-      title: "Self Care",
-    },
-  ];
+  const [plan, setPlan] = useState("weekly");
+
+  const handleClick = (e) => {
+    setPlan(e.target.textContent.toLowerCase().trim());
+  };
 
   return (
     <main>
       <Wrapper>
         <Dashboard>
           <Gutter>
-            <Menu />
-            <Card images={images} />
+            <Menu handleClick={handleClick} plan={plan} />
+            <Card images={images} plan={plan} />
           </Gutter>
         </Dashboard>
       </Wrapper>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import avatar from "../images/image-jeremy.png";
 import styled from "styled-components";
 import devices from "../helpers/devices";
@@ -109,13 +109,39 @@ const ItemLink = styled.a`
   &:hover {
     color: #ffffff;
   }
+
+  &.active {
+    color: #ffffff;
+  }
 `;
 
-const Menu = () => {
+const Menu = ({ handleClick, plan }) => {
+  const dailyElement = useRef(null);
+  const weeklyElement = useRef(null);
+  const monthlyElement = useRef(null);
+
+  useEffect(() => {
+    if (plan === "daily") {
+      dailyElement.current.classList.add("active");
+      weeklyElement.current.classList.remove("active");
+      monthlyElement.current.classList.remove("active");
+    }
+    if (plan === "weekly") {
+      dailyElement.current.classList.remove("active");
+      weeklyElement.current.classList.add("active");
+      monthlyElement.current.classList.remove("active");
+    }
+    if (plan === "monthly") {
+      dailyElement.current.classList.remove("active");
+      weeklyElement.current.classList.remove("active");
+      monthlyElement.current.classList.add("active");
+    }
+  }, [plan]);
+
   return (
     <DashboardItem>
       <Avatar>
-        <Image src={avatar} alt="jeremy" />
+        <Image src={avatar} alt="avatar" />
         <Span>Report for</Span>
         <Name>Jeremy Robson</Name>
       </Avatar>
@@ -123,13 +149,23 @@ const Menu = () => {
       <Report>
         <ReportList>
           <Item>
-            <ItemLink href="#daily">Daily</ItemLink>
+            <ItemLink ref={dailyElement} href="#daily" onClick={handleClick}>
+              Daily
+            </ItemLink>
           </Item>
           <Item>
-            <ItemLink href="#weekly">Weekly</ItemLink>
+            <ItemLink ref={weeklyElement} href="#weekly" onClick={handleClick}>
+              Weekly
+            </ItemLink>
           </Item>
           <Item>
-            <ItemLink href="#monthly">Monthly</ItemLink>
+            <ItemLink
+              ref={monthlyElement}
+              href="#monthly"
+              onClick={handleClick}
+            >
+              Monthly
+            </ItemLink>
           </Item>
         </ReportList>
       </Report>

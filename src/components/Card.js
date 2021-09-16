@@ -117,31 +117,31 @@ const Paragraph = styled.p`
   font-size: 0.9rem;
 `;
 
-const Card = ({ images }) => {
-  // const hours = item.timeframes[value].current;
-  // const lastWeek = item.timeframes[value].previous;
+const Card = ({ images, plan }) => {
+  return data.map((item, index) => {
+    const hours = item.timeframes[plan].current;
+    const lastWeek = item.timeframes[plan].previous;
 
-  return data.map((item, index) => (
-    <CardContent key={item.title}>
-      <Figure>
-        <Image src={images[index].url} alt={images[index].title} />
-      </Figure>
+    return (
+      <CardContent key={item.title}>
+        <Figure>
+          <Image src={images[index].url} alt={images[index].title} />
+        </Figure>
 
-      <Content>
-        <Title>
-          <H3>{item.title}</H3>
-          <Ellipsis src={ellipsis} alt="ellipsis" />
-        </Title>
+        <Content>
+          <Title>
+            <H3>{item.title}</H3>
+            <Ellipsis src={ellipsis} alt="ellipsis" />
+          </Title>
 
-        <Date>
-          {/* <time>{hours}hrs</time> */}
-          <Time>5hrs</Time>
-          {/* <p>Last Week - {lastWeek}hrs</p> */}
-          <Paragraph>Last Week - 4hrs</Paragraph>
-        </Date>
-      </Content>
-    </CardContent>
-  ));
+          <Date>
+            <Time>{hours}hrs</Time>
+            <Paragraph>Last Week - {lastWeek}hrs</Paragraph>
+          </Date>
+        </Content>
+      </CardContent>
+    );
+  });
 };
 
 export default Card;
